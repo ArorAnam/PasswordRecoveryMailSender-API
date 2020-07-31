@@ -21,7 +21,7 @@ html = """
 
 
 class EmailSchema(BaseModel):
-    email: EmailStr
+    email: str
 
 
 templates = Jinja2Templates(directory="templates")
@@ -43,7 +43,7 @@ async def get_email(request: Request):
 
 
 @app.post("/send_mail")
-async def send_mail(background_tasks: BackgroundTasks, request: Request, email: str = Form(...)) -> JSONResponse:
+async def send_mail(background_tasks: BackgroundTasks, email: str = Form(...)) -> JSONResponse:
     # this mail sending using fastapi background tasks, faster than the above one
     # Using Postman you can send post request, adding email in the body
 
@@ -60,13 +60,10 @@ async def send_mail(background_tasks: BackgroundTasks, request: Request, email: 
 
     
 
-    mail = FastMail(email="arora.nam21@gmail.com", password="kjol#1897", tls=True, port="587", service="gmail")
+    mail = FastMail(email="you-email-here", password="your-password", tls=True, port="587", service="gmail")
 
     background_tasks.add_task(mail.send_message, recipient=email, subject="testing HTML", body=template,
                                 text_format="html")
 
-    return templates.TemplateResponse("index.html",
-                        {
-                            "request": request
-                        })
+    return {"mail sent to": email}
 

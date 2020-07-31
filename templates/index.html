@@ -5,11 +5,28 @@
 <body>
     <h3>Send Recovery Email</h3>
 
-    <form action="/send_mail" id="send_email_form" method="post" name="myform">
-        <label for="email">Enter email : </label><br>
-        <input type="text" id="email" name="email"><br>
-        <input type="submit" value="Send Recovery Email">
-    </form>
+        <div id="message"><div>
+        <form action="/send_mail" id="send_email_form" method="post">
+            <label for="email">Enter email : </label><br>
+            <input type="text" id="email" name="email"><br> 
+            <input type="submit" value="Send Recovery Email">
+        </form>
+        <div id="response"></div>
+
+        <!-- <script>
+            $(function() {    
+                $("#send_email_form").on("submit", function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({"email": $(this)}),
+                        dataType: 'json'
+                    });
+                });
+            });    
+        </script> -->
 
 </body>
 </html>
