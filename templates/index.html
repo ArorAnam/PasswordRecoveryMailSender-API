@@ -6,7 +6,7 @@
     <h3>Send Recovery Email</h3>
 
         <div id="message"><div>
-        <form action="/send_mail" id="send_email_form" method="post">
+        <form action="/send_mail" id="send_email_form" method="post" name="myform">
             <label for="email">Enter email : </label><br>
             <input type="text" id="email" name="email"><br> 
             <input type="submit" value="Send Recovery Email">
@@ -28,5 +28,7 @@
             });    
         </script> -->
 
+
+    <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>    
 </body>
 </html>
