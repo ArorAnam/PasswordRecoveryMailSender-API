@@ -65,8 +65,7 @@ async def send_mail(background_tasks: BackgroundTasks, request: Request, email: 
         """ % (code)
 
 
-    # mail = FastMail(email="you-email-here", password="your-password", tls=True, port="587", service="gmail")
-    mail = FastMail(email="arora.nam21@gmail.com", password="kjol#1897", tls=True, port="587", service="gmail")
+    mail = FastMail(email="you-email-here", password="your-password", tls=True, port="587", service="gmail")
 
     background_tasks.add_task(mail.send_message, recipient=email, subject="testing HTML", body=template,
                                 text_format="html")
