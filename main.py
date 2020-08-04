@@ -1,5 +1,5 @@
 from fastapi import FastAPI, BackgroundTasks, Request, Form
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, RedirectResponse
 from fastapi_mail.fastmail import FastMail
 from fastapi import Header, File, Body, Query, UploadFile
 from pydantic import BaseModel, EmailStr
@@ -57,7 +57,7 @@ async def send_mail(background_tasks: BackgroundTasks, request: Request, email: 
     template = """
         <html> 
         <body>
-        <p>Hi This test mail using BackgroundTasks
+        <p>Hi !!!
         <br>Thanks for using Fastapi-mail</p>
         <p> Your passcode is : %s </p> 
         </body> 
@@ -65,7 +65,7 @@ async def send_mail(background_tasks: BackgroundTasks, request: Request, email: 
         """ % (code)
 
 
-    mail = FastMail(email="you-email-here", password="your-password", tls=True, port="587", service="gmail")
+    mail = FastMail(email="arora.nam21@gmail.com", password="kjol#1897", tls=True, port="587", service="gmail")
 
     background_tasks.add_task(mail.send_message, recipient=email, subject="testing HTML", body=template,
                                 text_format="html")
@@ -85,6 +85,9 @@ async def verify_passcode(request: Request, passcode: Optional[str] = Form(...))
     else:
         result = 'failed'
 
+    # response = RedirectResponse(url='/')
+    
+    # give the result of passcode validation
     return templates.TemplateResponse("verification_result.html",
                             {
                                 "request": request,
